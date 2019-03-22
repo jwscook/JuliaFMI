@@ -2,8 +2,16 @@
 # License is MIT: https://servant-om.fh-bielefeld.de/gitlab/AnHeuermann/FMU_JL_Simulator/blob/master/LICENSE.txt
 
 language: julia
+os:
+  - linux
+  - osx
 julia:
   - 1.0.2
+  - nightly
+
+allow_failures:
+  - julia: nightly
+  - os: osx
 
 coveralls: true
 
