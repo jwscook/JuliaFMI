@@ -13,9 +13,9 @@ include("FMIWrapper.jl")
 # Macro to identify logger library
 macro libLogger()
     if Sys.iswindows()
-        return joinpath(dirname(dirname(Base.source_path())),"bin", "win64", "logger.dll")
+        return joinpath(dirname(dirname(Base.source_path())),"bin", "win$(Sys.WORD_SIZE)", "logger.dll")
     elseif Sys.islinux()
-        return joinpath(dirname(dirname(Base.source_path())),"bin", "unix64", "logger.so")
+        return joinpath(dirname(dirname(Base.source_path())),"bin", "unix$(Sys.WORD_SIZE)", "logger.so")
     else
         error("OS not supportet")
     end
@@ -423,6 +423,8 @@ function loadFMU(pathToFMU::String, useTemp::Bool=false, overWriteTemp::Bool=tru
     else
         error("OS not supportet!")
     end
+
+    println("pathToDLL: $pathToDLL")
 
     if !isfile(pathToDLL)
         if Sys.iswindows()
