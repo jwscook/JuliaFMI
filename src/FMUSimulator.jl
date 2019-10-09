@@ -884,7 +884,7 @@ function main(pathToFMU::String)
             end
 
             if terminateSimulation
-                error("Solution got terminated bevore reaching end time.")
+                error("Solution got terminated before reaching end time.")
             end
 
             # save results
