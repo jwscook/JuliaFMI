@@ -907,4 +907,6 @@ function main(pathToFMU::String)
     catch
         rethrow()
     end
+
+    return true
 end
