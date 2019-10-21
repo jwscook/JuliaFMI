@@ -449,13 +449,15 @@ function loadFMU(pathToFMU::String, useTemp::Bool=false, overWriteTemp::Bool=tru
         error("FMU does not support modelExchange")
     end
 
+    fmu.modelName = replace(fmu.modelName, "." => "_")
+
     # pathToDLL
     if Sys.iswindows()
-        pathToDLL = joinpath(fmu.tmpFolder, "binaries", "win$(Sys.WORD_SIZE)", string(name, ".dll"))
+        pathToDLL = joinpath(fmu.tmpFolder, "binaries", "win$(Sys.WORD_SIZE)", string(fmu.modelName, ".dll"))
     elseif Sys.islinux()
-        pathToDLL = joinpath(fmu.tmpFolder, "binaries", "linux$(Sys.WORD_SIZE)", string(name, ".so"))
+        pathToDLL = joinpath(fmu.tmpFolder, "binaries", "linux$(Sys.WORD_SIZE)", string(fmu.modelName, ".so"))
     elseif Sys.isapple()
-        pathToDLL = joinpath(fmu.tmpFolder, "binaries", "darwin$(Sys.WORD_SIZE)", string(name, ".dylib"))
+        pathToDLL = joinpath(fmu.tmpFolder, "binaries", "darwin$(Sys.WORD_SIZE)", string(fmu.modelName, ".dylib"))
         println(pathToDLL)
     else
         error("OS not supported!")
